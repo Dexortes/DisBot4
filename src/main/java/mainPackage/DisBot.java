@@ -1,6 +1,5 @@
 package mainPackage;
 
-
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
@@ -36,3 +35,5 @@ public class DisBot {
         }
     }
 }
+
+//comment for push-check
