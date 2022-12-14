@@ -21,7 +21,8 @@ public class DisBot {
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(token);
         builder.setActivity(Activity.playing("Study Soup World"))
         .setStatus(OnlineStatus.ONLINE)
-        .enableIntents(GatewayIntent.MESSAGE_CONTENT);
+        .enableIntents(GatewayIntent.MESSAGE_CONTENT)
+        .enableIntents(GatewayIntent.GUILD_MEMBERS);
         shardManager = builder.build();
 
         shardManager.addEventListener(new EventListener());

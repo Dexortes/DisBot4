@@ -1,8 +1,12 @@
 package mainPackage.Listeners;
 
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageReaction;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.Channel;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -19,22 +23,18 @@ public class EventListener extends ListenerAdapter {
         String channelMention = event.getChannel().getAsMention();
         Channel channel = event.getChannel();
         String jumpLink = event.getJumpUrl();
-
         assert currentUser != null;
-        String message = currentUser.getAsMention() + " you've been noticed!" + emoji + " in the channel " + channelMention;
+        String message = currentUser.getAsMention() + " you've reacted with " + emoji + " in the channel " + channelMention;
         //event.getGuild().getDefaultChannel().sendMessage(message); //doesn't work
-
         event.getGuild().getTextChannelsByName("general", true).get(0).sendMessage(message).queue();
-
-
     }
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         String message = event.getMessage().getContentRaw();
-        if(message.contains("Study")){
-            event.getChannel().sendMessage("Soup!").queue();
+        if(message.contains("$tudy")){
+            event.getChannel().sendMessage("$oup!").queue();
         }
     }
-    
+
 }
