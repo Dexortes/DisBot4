@@ -6,12 +6,18 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.Channel;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class EventListener extends ListenerAdapter {
@@ -37,4 +43,21 @@ public class EventListener extends ListenerAdapter {
         }
     }
 
+    @Override
+    public void onGuildJoin(GuildJoinEvent event) {
+        List<CommandData> commandsList = new ArrayList<>();
+        commandsList.add(Commands.slash("greetings", "Get welcomed by the bot"));
+        event.getGuild().updateCommands().addCommands(commandsList).queue();
+    }
+
+    @Override
+    public void onGuildReady(GuildReadyEvent event) {
+        List<CommandData> commandsList = new ArrayList<>();
+        commandsList.add(Commands.slash("greetings", "Get welcomed by the bot"));
+        event.getGuild().updateCommands().addCommands(commandsList).queue();
+
+//        if(event.getGuild().getIdLong() == 988498396467851344L){ //spec commands for a certain guild
+//
+//        }
+    }
 }
