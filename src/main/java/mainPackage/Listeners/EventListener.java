@@ -18,6 +18,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class EventListener extends ListenerAdapter {
@@ -40,6 +41,15 @@ public class EventListener extends ListenerAdapter {
         String message = event.getMessage().getContentRaw();
         if(message.contains("$tudy")){
             event.getChannel().sendMessage("$oup!").queue();
+        }
+        String userMention = Objects.requireNonNull(event.getMember()).getAsMention();
+        switch(message){
+            case "!help" -> event.getChannel().sendMessage("Hey " + userMention + "! If you're just arrived check out our " +
+                    Objects.requireNonNull(event.getGuild().getTextChannelById("1043022332551254056")).getAsMention() + " channel").queue();
+            case "!rules" -> event.getChannel().sendMessage("Hey " + userMention + "! If you want to check our rules go to " +
+                    Objects.requireNonNull(event.getGuild().getTextChannelById("988498600818540594")).getAsMention() + " channel").queue();
+            case "!qotd" -> event.getChannel().sendMessage("Wanna know about Question of the Day? Click on " + Objects.requireNonNull(event.getGuild().getTextChannelById("1047357341340807220")).getAsMention()).queue();
+            case "!charge" -> event.getChannel().sendMessage(userMention + " ordered to charge!").queue();
         }
     }
 
